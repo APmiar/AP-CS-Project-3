@@ -106,16 +106,66 @@ public class Board extends JPanel {
      * nearby mines.
      */
     private int countMinesAround(int x, int y) {
-        int count = 0;
-        for (int i = x-2; i < x+1; i++) {
-            for (int j = y-2; j < y+1; j++) {
-                if (this.cells[i][j].isMine()) {
-                    count++;
-                }
-            }
-        }
-        return count;
-    }
+		int count = 0;
+		if (x - 2 <= 0 && y - 2 <= 0) {
+			for (int i = 0; i < x + 1; i++) {
+				for (int j = 0; j < y + 1; j++) {
+					if (this.cells[i][j].isMine()) {
+						count++;
+					}
+				}
+			}
+		} else if (x + 1 >= this.cells.length && y + 1 >= this.cells[0].length) {
+			for (int i = x - 2; i < this.cells.length; i++) {
+				for (int j = y - 2; j < this.cells[0].length; j++) {
+					if (this.cells[i][j].isMine()) {
+						count++;
+					}
+				}
+			}
+		} else if (x + 1 >= this.cells.length) {
+			for (int i = x - 2; i < this.cells.length; i++) {
+				for (int j = y - 2; j < y + 1; j++) {
+					if (this.cells[i][j].isMine()) {
+						count++;
+					}
+				}
+			}
+		} else if (y + 1 >= this.cells[0].length) {
+			for (int i = x - 2; i < x + 1; i++) {
+				for (int j = y - 2; j < this.cells[0].length; j++) {
+					if (this.cells[i][j].isMine()) {
+						count++;
+					}
+				}
+			}
+		} else if (x - 2 <= 0) {
+			for (int i = 0; i < x + 1; i++) {
+				for (int j = y - 2; j < y + 1; j++) {
+					if (this.cells[i][j].isMine()) {
+						count++;
+					}
+				}
+			}
+		} else if (y - 2 <= 0) {
+			for (int i = x - 2; i < x + 1; i++) {
+				for (int j = 0; j < y + 1; j++) {
+					if (this.cells[i][j].isMine()) {
+						count++;
+					}
+				}
+			}
+		} else {
+			for (int i = x - 2; i < x + 1; i++) {
+				for (int j = y - 2; j < y + 1; j++) {
+					if (this.cells[i][j].isMine()) {
+						count++;
+					}
+				}
+			}
+		}
+		return count;
+	}
 
     public void paint(Graphics g) {
         int coveredCells = 0;
