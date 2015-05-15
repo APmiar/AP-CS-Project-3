@@ -107,9 +107,13 @@ public class Board extends JPanel {
      */
     private int countMinesAround(int x, int y) {
         int count = 0;
-        
-        /* YOUR CODE GOES HERE! */ 
-
+        for (int i = x-2; i < x+1; i++) {
+            for (int j = y-2; j < y+1; j++) {
+                if (this.cells[i][j].isMine()) {
+                    count++;
+                }
+            }
+        }
         return count;
     }
 
