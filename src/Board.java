@@ -263,11 +263,28 @@ public class Board extends JPanel {
      * 
      * This method is used to uncover nearby non-empty cells.
      */
-    private void uncoverAroundCell(int x, int y) {
-    	
-    	/* YOUR CODE GOES HERE! */
-    	
-    }
+ private void uncoverAroundCell(int x, int y) { // Need to establish if user inputs index or actual value. Testing some nested loops.
+		int xval = x-1;
+		int yval = y-1;
+		while (xval >= 0 || !(this.cells[xval][yval].isMine())) {   // Not sure of efficiency/viability of this implementation.
+			while (yval >= 0 || !(this.cells[xval][yval].isMine())) {
+				yval--;
+			}
+			if (this.cells[xval][yval].isMine()) {
+				countMinesAround(xval+1, yval+1);
+			}
+			xval--;
+		}
+		while (xval < this.cells.length || !(this.cells[xval][yval].isMine())) {
+			while (yval < this.cells[0].length || !(this.cells[xval][yval].isMine())) {
+				yval++;
+			}
+			if (this.cells[xval][yval].isMine()) {
+				countMinesAround(xval+1, yval+1);
+			}
+			xval++;
+		}
+	}
 
     private boolean checkEmpty(Cell cell) {
         if (!cell.isChecked()) {
